@@ -31,32 +31,32 @@
     margin: 10px 0 30px;
 }
 
-.action{
+.actions{
     width: 100%;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
 }
 
-.action a{
+.actions a{
     font-size: 1.5rem;
     height: 25px;
     color: #fe5d42;
     cursor: pointer;
 }
 
-.action div{
+.actions div{
     display: flex;
     align-items: center;
 }
 
-.action div span{
+.actions div span{
     width: 20px;
     text-align: center;
     margin: 0 10px;
 }
 
-.action div button{
+.actions div button{
     background-color: #fe5d42;
     color: #fff;
     border: none;
