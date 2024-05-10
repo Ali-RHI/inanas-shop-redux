@@ -7,6 +7,7 @@ import { useProducts } from '../context/ProductsContext.jsx';
 import styles from './ProductsPage.module.css';
 import { FaListUl } from 'react-icons/fa';
 import { filterProducts, searchProducts } from '../helpers/helper.js';
+import { useSearchParams } from 'react-router-dom';
 
 function ProductsPage() {
 	const products = useProducts();
@@ -15,10 +16,13 @@ function ProductsPage() {
 	const [search, setSearch] = useState('');
 	const [query, setQuery] = useState({});
 
+	const [searchParams,setSearchParams] = useSearchParams()
+
 	useEffect(() => {
 		setDisplayed(products);
 	}, [products]);
 	useEffect(() => {
+		setSearchParams(query)
 		let finalProducts = searchProducts(products, query.search);
 		finalProducts = filterProducts(finalProducts, query.category);
 		setDisplayed(finalProducts);
