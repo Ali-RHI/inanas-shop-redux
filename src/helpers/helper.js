@@ -10,4 +10,10 @@ const searchProducts = (products, search) => {
 	return searchedProducts;
 };
 
-export { shortenText, searchProducts };
+const filterProducts = (products, category) => {
+	if (!category || category ==="all") return products;
+	const filteredProducts = products.filter((p) => p.category === category);
+	return filteredProducts;
+};
+
+export { shortenText, searchProducts, filterProducts };
