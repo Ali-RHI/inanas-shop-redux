@@ -6,7 +6,11 @@ import { useProducts } from '../context/ProductsContext.jsx';
 
 import styles from './ProductsPage.module.css';
 import { FaListUl } from 'react-icons/fa';
-import { filterProducts, searchProducts } from '../helpers/helper.js';
+import {
+	createQueryObject,
+	filterProducts,
+	searchProducts,
+} from '../helpers/helper.js';
 import { useSearchParams } from 'react-router-dom';
 
 function ProductsPage() {
@@ -16,20 +20,20 @@ function ProductsPage() {
 	const [search, setSearch] = useState('');
 	const [query, setQuery] = useState({});
 
-	const [searchParams,setSearchParams] = useSearchParams()
+	const [searchParams, setSearchParams] = useSearchParams();
 
 	useEffect(() => {
 		setDisplayed(products);
 	}, [products]);
 	useEffect(() => {
-		setSearchParams(query)
+		setSearchParams(query);
 		let finalProducts = searchProducts(products, query.search);
 		finalProducts = filterProducts(finalProducts, query.category);
 		setDisplayed(finalProducts);
 	}, [query]);
 
 	const searchHandler = () => {
-		setQuery({ ...query, search });
+		setQuery(createQueryObject(query, { search }));
 	};
 
 	const categoryHandler = (event) => {
@@ -37,7 +41,7 @@ function ProductsPage() {
 		const category = event.target.innerText.toLowerCase();
 		console.log(category);
 		if (tagName != 'LI') return;
-		setQuery((query) => ({ ...query, category }));
+		setQuery((query) => createQueryObject(query, { category }));
 	};
 
 	return (
