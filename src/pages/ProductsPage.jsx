@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import { ImSearch } from 'react-icons/im';
 import Card from '../components/Card.jsx';
 import Loader from '../components/Loader.jsx';
 import { useProducts } from '../context/ProductsContext.jsx';
@@ -13,6 +12,7 @@ import {
 	searchProducts,
 } from '../helpers/helper.js';
 import { useSearchParams } from 'react-router-dom';
+import SearchBox from '../components/SearchBox.jsx';
 
 function ProductsPage() {
 	const products = useProducts();
@@ -35,9 +35,6 @@ function ProductsPage() {
 		setDisplayed(finalProducts);
 	}, [query]);
 
-	const searchHandler = () => {
-		setQuery(createQueryObject(query, { search }));
-	};
 
 	const categoryHandler = (event) => {
 		const { tagName } = event.target;
@@ -49,19 +46,8 @@ function ProductsPage() {
 
 	return (
 		<>
-			<div>
-				<input
-					type="text"
-					placeholder="Seach ..."
-					value={search}
-					onChange={(e) =>
-						setSearch(e.target.value.toLowerCase().trim())
-					}
-				/>
-				<button onClick={searchHandler}>
-					<ImSearch />
-				</button>
-			</div>
+		<SearchBox search={search} setSearch={setSearch} setQuery={setQuery} />
+			
 			<div className={styles.container}>
 				<div className={styles.products}>
 					{!displayed.length && <Loader />}
