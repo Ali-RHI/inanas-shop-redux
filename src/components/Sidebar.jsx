@@ -1,10 +1,10 @@
-import { createQueryObject } from "../helpers/helper.js";
+import { createQueryObject } from '../helpers/helper.js';
 import { FaListUl } from 'react-icons/fa';
 
+import styles from './Sidebar.module.css';
 
-function Sidebar({setQuery}) {
-
-    const categoryHandler = (event) => {
+function Sidebar({ setQuery }) {
+	const categoryHandler = (event) => {
 		const { tagName } = event.target;
 		const category = event.target.innerText.toLowerCase();
 		console.log(category);
