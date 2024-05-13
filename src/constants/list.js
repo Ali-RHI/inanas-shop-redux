@@ -6,4 +6,5 @@ const categories = [
 	{ id: 5, type: "Women's Clothing" },
 ];
 
+
 export { categories };
