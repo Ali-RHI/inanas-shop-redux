@@ -10,7 +10,6 @@ import styles from './DetailesPage.module.css';
 function DetailesPage() {
 	const { id } = useParams();
 	const productDetailes = useProductDetailes(+id);
-	console.log(productDetailes);
 	if (!productDetailes) return <Loader />;
 	return (
 		<div className={styles.container}>

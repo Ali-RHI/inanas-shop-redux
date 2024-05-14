@@ -9,6 +9,7 @@ const initialState = {
 };
 
 const reducer = (state, action) => {
+	console.log(action);
 	switch (action.type) {
 		case 'ADD_ITEM':
 			if (
@@ -31,6 +32,7 @@ const reducer = (state, action) => {
 				...sumProducts(newSelectedItems),
 			};
 		case 'INCREASE':
+			console.log(state.selectedItems);
 			const increaseIndex = state.selectedItems.findIndex(
 				(item) => item.id === action.payload.id
 			);
