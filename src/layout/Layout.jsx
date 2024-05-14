@@ -2,7 +2,7 @@ import { PiShoppingCartSimpleBold } from 'react-icons/pi';
 import { useCart } from '../context/CartContext.jsx';
 import { Link } from 'react-router-dom';
 
-import styles from "./Layout.module.css"
+import styles from './Layout.module.css';
 
 function Layout({ children }) {
 	const [state] = useCart();
@@ -11,8 +11,12 @@ function Layout({ children }) {
 			<header className={styles.header}>
 				<Link to="/products">Inanas Shop</Link>
 				<Link to="/checkout">
-					<PiShoppingCartSimpleBold />
-					{!!state.itemsCounter && <span>{state.itemsCounter}</span>}
+					<div>
+						<PiShoppingCartSimpleBold />
+						{!!state.itemsCounter && (
+							<span>{state.itemsCounter}</span>
+						)}
+					</div>
 				</Link>
 			</header>
 			{children}
