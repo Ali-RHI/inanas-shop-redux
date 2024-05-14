@@ -5,6 +5,7 @@ import { shortenText } from '../helpers/helper.js';
 
 import styles from './Card.module.css';
 import { useCart } from '../context/CartContext.jsx';
+import { MdDeleteOutline } from 'react-icons/md';
 
 function Card({ data }) {
 	const { id, title, image, price } = data;
@@ -12,8 +13,8 @@ function Card({ data }) {
 	const [state, dispatch] = useCart();
 	console.log(state);
 
-	const clickHandler = () => {
-		dispatch({ type: 'ADD_ITEM', payload: data });
+	const clickHandler = (type) => {
+		dispatch({ type, payload: data });
 	};
 
 	return (
@@ -29,9 +30,14 @@ function Card({ data }) {
 					<TbListDetails />
 				</Link>
 				<div>
-					<button onClick={clickHandler}>
+					<button onClick={() => {clickHandler("ADD_ITEM")}}>
 						<TbShoppingBagCheck />
 					</button>
+					<button onClick={() => {clickHandler("REMOVE_ITEM")}}>
+						<MdDeleteOutline />
+					</button>
+					<button onClick={() => {clickHandler("INCREASE")}}>+</button>
+					<button onClick={() => {clickHandler("DECREASE")}}>-</button>
 				</div>
 			</div>
 		</div>
