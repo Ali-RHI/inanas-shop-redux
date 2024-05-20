@@ -2,10 +2,15 @@ import React from 'react';
 import { shortenText } from '../helpers/helper.js';
 import { MdDeleteOutline } from 'react-icons/md';
 
-import styles from './BasketCard.module.css'
+import styles from './BasketCard.module.css';
+import { useDispatch } from 'react-redux';
+import { decrease, increase, removeItem } from '../features/cart/cartSlice.js';
 
-function BasketCard({ data, clickHandler }) {
+function BasketCard({ data }) {
 	const { image, title, quantity } = data;
+
+	const dispatch = useDispatch();
+
 	return (
 		<div className={styles.card}>
 			<img
@@ -17,7 +22,7 @@ function BasketCard({ data, clickHandler }) {
 				{quantity === 1 && (
 					<button
 						onClick={() => {
-							clickHandler('REMOVE_ITEM', data);
+							dispatch(removeItem(data));
 						}}>
 						<MdDeleteOutline />
 					</button>
@@ -25,7 +30,7 @@ function BasketCard({ data, clickHandler }) {
 				{quantity > 1 && (
 					<button
 						onClick={() => {
-							clickHandler('DECREASE', data);
+							dispatch(decrease(data));
 						}}>
 						-
 					</button>
@@ -33,7 +38,7 @@ function BasketCard({ data, clickHandler }) {
 				<span>{quantity}</span>
 				<button
 					onClick={() => {
-						clickHandler('INCREASE', data);
+						dispatch(increase(data));
 					}}>
 					+
 				</button>
