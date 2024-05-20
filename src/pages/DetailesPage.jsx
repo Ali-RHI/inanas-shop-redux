@@ -6,10 +6,20 @@ import { IoMdPricetag } from 'react-icons/io';
 import { FaArrowLeft } from 'react-icons/fa';
 
 import styles from './DetailesPage.module.css';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { fetchProducts } from '../features/product/productSlice.js';
 
 function DetailesPage() {
 	const { id } = useParams();
-	const productDetailes = useProductDetailes(+id);
+	const dispatch = useDispatch();
+	useEffect(() => {
+		dispatch(fetchProducts());
+	}, []);
+	// const productDetailes = useProductDetailes(+id);
+	const productDetailes = useSelector((store) =>
+		store.product.products.find((i) => i.id === +id)
+	);
 	if (!productDetailes) return <Loader />;
 	return (
 		<div className={styles.container}>

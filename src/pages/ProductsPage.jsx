@@ -13,16 +13,23 @@ import {
 import { useSearchParams } from 'react-router-dom';
 import SearchBox from '../components/SearchBox.jsx';
 import Sidebar from '../components/Sidebar.jsx';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchProducts } from '../features/product/productSlice.js';
 
 function ProductsPage() {
+	const dispatch = useDispatch();
+	const { products,loading } = useSelector((store) => store.product);
 	// const products = useProducts();
-	const products = []
 
 	const [displayed, setDisplayed] = useState([]);
 	const [search, setSearch] = useState('');
 	const [query, setQuery] = useState({});
 
 	const [searchParams, setSearchParams] = useSearchParams();
+
+	useEffect(() => {
+		dispatch(fetchProducts());
+	}, []);
 
 	useEffect(() => {
 		setDisplayed(products);
@@ -45,7 +52,7 @@ function ProductsPage() {
 			/>
 			<div className={styles.container}>
 				<div className={styles.products}>
-					{!displayed.length && <Loader />}
+					{loading && <Loader />}
 					{displayed.map((p) => (
 						<Card
 							key={p.id}
@@ -53,7 +60,10 @@ function ProductsPage() {
 						/>
 					))}
 				</div>
-				<Sidebar query={query } setQuery={setQuery} />
+				<Sidebar
+					query={query}
+					setQuery={setQuery}
+				/>
 			</div>
 		</>
 	);
