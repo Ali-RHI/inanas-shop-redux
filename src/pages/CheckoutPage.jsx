@@ -1,24 +1,24 @@
 import BaskeSidebar from '../components/BaskeSidebar.jsx';
 import BasketCard from '../components/Basketcard.jsx';
-import { useCart } from '../context/CartContext.jsx';
+// import { useCart } from '../context/CartContext.jsx';
 
 import styles from "./CheckoutPage.module.css"
 
 function ChckoutPage() {
-	const [state, dispatch] = useCart();
-	const clickHandler = (type, data) => {
-		dispatch({ type, payload: data });
-	};
-	if (!state.itemsCounter) {
-		return (
-			<div className={styles.container}>
-				<p>Empty</p>
-			</div>
-		);
-	}
+	// const [state, dispatch] = useCart();
+	// const clickHandler = (type, data) => {
+	// 	dispatch({ type, payload: data });
+	// };
+	// if (!state.itemsCounter) {
+	// 	return (
+	// 		<div className={styles.container}>
+	// 			<p>Empty</p>
+	// 		</div>
+	// 	);
+	// }
 	return (
 		<div className={styles.container}>
-			<BaskeSidebar
+			{/* <BaskeSidebar
 				state={state}
 				clickHandler={clickHandler}
 			/>
@@ -30,7 +30,7 @@ function ChckoutPage() {
 						clickHandler={clickHandler}
 					/>
 				))}
-			</div>
+			</div> */}
 		</div>
 	);
 }

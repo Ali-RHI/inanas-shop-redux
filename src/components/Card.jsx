@@ -4,18 +4,19 @@ import { Link } from 'react-router-dom';
 import { productQuantity, shortenText } from '../helpers/helper.js';
 
 import styles from './Card.module.css';
-import { useCart } from '../context/CartContext.jsx';
+// import { useCart } from '../context/CartContext.jsx';
 import { MdDeleteOutline } from 'react-icons/md';
 
 function Card({ data }) {
 	const { id, title, image, price } = data;
 
-	const [state, dispatch] = useCart();
+	// const [state, dispatch] = useCart();
 
-	const quantity = productQuantity(state, id);
+	// const quantity = productQuantity(state, id);
+	const quantity = 0;
 
 	const clickHandler = (type) => {
-		dispatch({ type, payload: data });
+		// dispatch({ type, payload: data });
 	};
 
 	return (

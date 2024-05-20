@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import Card from '../components/Card.jsx';
 import Loader from '../components/Loader.jsx';
-import { useProducts } from '../context/ProductsContext.jsx';
+// import { useProducts } from '../context/ProductsContext.jsx';
 
 import styles from './ProductsPage.module.css';
 import {
@@ -15,7 +15,8 @@ import SearchBox from '../components/SearchBox.jsx';
 import Sidebar from '../components/Sidebar.jsx';
 
 function ProductsPage() {
-	const products = useProducts();
+	// const products = useProducts();
+	const products = []
 
 	const [displayed, setDisplayed] = useState([]);
 	const [search, setSearch] = useState('');
