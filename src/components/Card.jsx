@@ -6,14 +6,18 @@ import { productQuantity, shortenText } from '../helpers/helper.js';
 import styles from './Card.module.css';
 // import { useCart } from '../context/CartContext.jsx';
 import { MdDeleteOutline } from 'react-icons/md';
+import { useDispatch, useSelector } from 'react-redux';
+import { addItem, decrease, increase, removeItem } from '../features/cart/cartSlice.js';
 
 function Card({ data }) {
 	const { id, title, image, price } = data;
 
 	// const [state, dispatch] = useCart();
+	const state = useSelector((store) => store.cart);
+	const dispath = useDispatch()
 
-	// const quantity = productQuantity(state, id);
-	const quantity = 0;
+	const quantity = productQuantity(state, id);
+
 
 	const clickHandler = (type) => {
 		// dispatch({ type, payload: data });
@@ -35,7 +39,7 @@ function Card({ data }) {
 					{quantity === 1 && (
 						<button
 							onClick={() => {
-								clickHandler('REMOVE_ITEM');
+								dispath(removeItem(data));
 							}}>
 							<MdDeleteOutline />
 						</button>
@@ -43,7 +47,7 @@ function Card({ data }) {
 					{quantity > 1 && (
 						<button
 							onClick={() => {
-								clickHandler('DECREASE');
+								dispath(decrease(data));
 							}}>
 							-
 						</button>
@@ -52,14 +56,14 @@ function Card({ data }) {
 					{quantity === 0 ? (
 						<button
 							onClick={() => {
-								clickHandler('ADD_ITEM');
+								dispath(addItem(data));
 							}}>
 							<TbShoppingBagCheck />
 						</button>
 					) : (
 						<button
 							onClick={() => {
-								clickHandler('INCREASE');
+								dispath(increase(data));
 							}}>
 							+
 						</button>
